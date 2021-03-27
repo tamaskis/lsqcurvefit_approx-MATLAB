@@ -19,7 +19,7 @@ Fits a linear, polynomial, power, exponential, or logarithmic model to a set of 
             
 `[c0,c1] = least\_squares\_fit(x,y,'linear')` returns the coefficients `c0` and `c1` for the linear least squares fit <img src="https://latex.codecogs.com/svg.latex?y=c_{0}&plus;c_{1}x" title="y=c_{0}+c_{1}x" /> to a set of data defined by the vectors `x` (independent variable) and `y` (dependent variable).
  
-`c = least\_squares\_fit(x,y,'poly',n)` returns the coefficient vector $\vec{c}=(c_{0},...,c_{n})^T$ for the $n$\Th\ degree polynomial least squares fit $y=c_{0}+c_{1}x+\dots+c_{n}x^{n}$ to a set of data defined by the vectors `x` (independent variable) and `y` (dependent variable).
+`c = least\_squares\_fit(x,y,'poly',n)` returns the coefficient vector <img src="https://latex.codecogs.com/svg.latex?\mathbf{c}=\left(c_{0},...,c_{n}\right)^{T}" title="\mathbf{c}=\left(c_{0},...,c_{n}\right)^{T}" /> for the <img src="https://latex.codecogs.com/svg.latex?n^{\textrm{th}}" title="n^{\textrm{th}}" /> degree polynomial least squares fit <img src="https://latex.codecogs.com/svg.latex?y=c_{0}&plus;c_{1}x&plus;\dots&plus;c_{n}x^{n}" title="y=c_{0}+c_{1}x+\dots+c_{n}x^{n}" /> to a set of data defined by the vectors `x` (independent variable) and `y` (dependent variable).
 
 `[a,b] = least\_squares\_fit(x,y,'power')` returns the coefficients `a` and `b` for the power least squares fit <img src="https://latex.codecogs.com/svg.latex?y=ax^{b}" title="y=ax^{b}" /> to a set of data defined by the vectors `x` (independent variable) and `y` (dependent variable).
 
