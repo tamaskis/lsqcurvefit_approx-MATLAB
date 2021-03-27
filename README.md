@@ -1,15 +1,16 @@
 # `least_squares_fit`
 
-Calculates the root of a univariate function using the secant method.
+Fits a linear, polynomial, power, exponential, or logarithmic model to a set of data using the method of least squares.
 
 
 ## Syntax
 
-`root = secant_method(f,x0)`\
-`root = secant_method(f,x0,TOL)`\
-`root = secant_method(f,x0,[],imax)`\
-`root = secant_method(f,x0,TOL,imax)`\
-`root = secant_method(__,'all')`
+`[c0,c1] = least_squares_fit(x,y)}`\
+`[c0,c1] = least_squares_fit(x,y,'linear')}`\
+`c = least_squares_fit(x,y,'poly',n)}`\
+`[a,b] = least_squares_fit(x,y,'power')}`\
+`[a,b] = least_squares_fit(x,y,'exp')}`\
+`[a,b] = least_squares_fit(x,y,'log')}`
 
 
 ## Description
