@@ -60,12 +60,7 @@ Fits a linear, polynomial, exponential, or logarithmic model to a set of data us
   
 
 
-**NOTE:**
-
-
-
-
-Additionally, for all the syntaxes, the coefficient of determination (`r2`) and a string (`eqn`) storing the fitted equation (for use in figure text with LaTeX interpreter) are also returned.
+**NOTE:** Additionally, for all the syntaxes, the coefficient of determination (`r2`) and a string (`eqn`) storing the fitted equation (for use in figure text with LaTeX interpreter) are also returned.
 
 
   
