@@ -1,7 +1,6 @@
 # `least_squares_fit`
 
-
-Fits a linear, polynomial, exponential, or logarithmic model to a set of data using linear least squares.
+Fits a linear, polynomial, power, exponential, or logarithmic model to a set of data using linear least squares.
 
 
   
