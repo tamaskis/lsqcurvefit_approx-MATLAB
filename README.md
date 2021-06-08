@@ -10,31 +10,11 @@ Fits a linear, polynomial, exponential, or logarithmic model to a set of data us
   
 
 
-`[c,r2,eqn] = least_squares_fit(x,y)`
-
-
-
-
-`[c,r2,eqn] = least_squares_fit(x,y,'linear')`
-
-
-
-
-`[c,r2,eqn] = least_squares_fit(x,y,'poly',n)`
-
-
-
-
-`[c,r2,eqn] = least_squares_fit(x,y,'power')`
-
-
-
-
-`[c,r2,eqn] = least_squares_fit(x,y,'exp')`
-
-
-
-
+`[c,r2,eqn] = least_squares_fit(x,y)`\
+`[c,r2,eqn] = least_squares_fit(x,y,'linear')`\
+`[c,r2,eqn] = least_squares_fit(x,y,'poly',n)`\
+`[c,r2,eqn] = least_squares_fit(x,y,'power')`\
+`[c,r2,eqn] = least_squares_fit(x,y,'exp')`\
 `[c,r2,eqn] = least_squares_fit(x,y,'log')`
 
 
