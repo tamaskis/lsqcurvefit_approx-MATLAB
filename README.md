@@ -1,4 +1,4 @@
-# `least_squares_fit`
+# `least_squares_fit` [![View least_squares_fit-MATLAB on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/93710-least_squares_fit-matlab)
 
 Fits a linear, polynomial, power, exponential, or logarithmic model to a set of data using linear least squares.
 
