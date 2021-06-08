@@ -1,60 +1,59 @@
+%==========================================================================
+%
 % least_squares_fit  Fits a linear, polynomial, power, exponential, or 
-% logarithmic model to a set of data using the method of least squares.
+% logarithmic model to a set of data using linear least squares.
 %
-%   [c0,c1] = least_squares_fit(x,y) returns the coefficients "c0" and "c1"
-%   for the linear least squares fit y=c0+c1*x to a set of data defined by 
-%   the vectors "x" (independent variable) and "y" (dependent variable).
+%   [c,r2,eqn] = least_squares_fit(x,y)
+%   [c,r2,eqn] = least_squares_fit(x,y,'linear')
+%   [c,r2,eqn] = least_squares_fit(x,y,'poly',n)
+%   [c,r2,eqn] = least_squares_fit(x,y,'power')
+%   [c,r2,eqn] = least_squares_fit(x,y,'exp')
+%   [c,r2,eqn] = least_squares_fit(x,y,'log')
 %
-%   [c0,c1] = least_squares_fit(x,y,'linear') returns the coefficients "c0" 
-%   and "c1" for the linear least squares fit y=c0+c1*x to a set of data
-%   defined by the vectors "x" (independent variable) and "y" (dependent 
-%   variable).
-%
-%   c = least_squares_fit(x,y,'poly',n) returns the coefficient vector 
-%   c=(c0,...,cn)^T for the nth degree polynomial least squares fit 
-%   y=c0+c1*x+...+cn*x^n to a set of data defined by the vectors "x" 
-%   (independent variable) and "y" (dependent variable).
-%
-%   [a,b] = least_squares_fit(x,y,'power') returns the coefficients "a" and
-%   "b" for the power least squares fit y=a*x^b to a set of data defined by
-%   the vectors "x" (independent variable) and "y" (dependent variable).
-%
-%   [a,b] = least_squares_fit(x,y,'exp') returns the coefficients "a" and
-%   "b" for the exponential least squares fit y=a*e^(b*x) to a set of data 
-%   defined by the vectors "x" (independent variable) and "y" (dependent 
-%   variable).
-%
-%   [a,b] = least_squares_fit(x,y,'log') returns the coefficients "a" and
-%   "b" for the logarithmic least squares fit y=a+b*ln(x) to a set of data 
-%   defined by the vectors "x" (independent variable) and "y" (dependent 
-%   variable).
-%
+% MATLAB Central File Exchange: 
 % GitHub: https://github.com/tamaskis/least_squares_fit-MATLAB
 %
-% See "DOCUMENTATION.pdf" for additional documentation and examples. 
-% Examples can also be found in EXAMPLES.m. Both of these files are 
-% included with the download.
+% See EXAMPLES.mlx for examples and "DOCUMENTATION.pdf" for additional 
+% documentation. Both of these files are included with the download.
 %
-% Copyright (c) 2021 Tamas Kis
-% Last Update: 2021-03-26
-
-
-
-
-%% FUNCTION
-
-% INPUT: x - independent variable data
-%        y - dependent variable data
-%        model - 'linear', 'poly', 'power', 'exp', or 'log'
-%        n - degree of approximating polynomial
-% OUTPUT: three options, dependending on input for "model":
-%           --> [c0,c1] - coefficients for linear fit
-%           --> c - coefficient vector for polynomial fit
-%           --> [a,b] - coefficients for power, exponential, or logarithmic
-%                       fits
-function varargout = least_squares_fit(x,y,model,n)
+% Copyright © 2021 Tamas Kis
+% Last Update: 2021-06-08
+%
+%--------------------------------------------------------------------------
+%
+% -------
+% INPUTS:
+% -------
+%   x       - (1×m or m×1) independent variable data
+%   y       - (1×m or m×1) dependent variable data
+%   model   - (OPTIONAL) (char) 'linear', 'poly', 'power', 'exp', or 'log'
+%   n       - (OPTIONAL) (1×1) degree of approximating polynomial
+%
+% --------
+% OUTPUTS:
+% --------
+%   c       - (2×1 or n×1) coefficient vector describing fit:
+%               --> [m,b] - linear fit
+%               --> [c0,...,cn] - polynomial fit
+%               --> [a,b] - power, exponential, and logarithmic fits
+%   r2      - (1×1) coefficient of determination
+%   eqn     - (string) string storing fitted equation (includes "$" signs,
+%             so make sure to enable the LaTeX interpreter when using "eqn"
+%             in plots)
+%
+% -----
+% NOTE:
+% -----
+%   --> linear fit:         y=m*x+b
+%   --> polynomial fit:     y=c0+c1*x+...+cn*x^n
+%   --> power fit:          y=a*x^b
+%   --> exponential fit:    y=a*e^(b*x)
+%   --> logarithmic fit:    y=a+b*ln(x)
+%
+%==========================================================================
+function [c,r2,eqn] = least_squares_fit(x,y,model,n)
     
-    % transposes data vectors to column vectors if not already
+    % transposes data vectors to column vectors if needed
     if size(x,1) < length(x)
         x = x';
     end
@@ -67,8 +66,7 @@ function varargout = least_squares_fit(x,y,model,n)
         model = 'linear';
     end
     
-    % performs linearization if necessary and sets degree of approximating
-    % polynomial needed
+    % performs linearization and sets degree of approximating polynomial
     if strcmp(model,'linear')
         n = 1;
     elseif strcmp(model,'power')
@@ -86,29 +84,74 @@ function varargout = least_squares_fit(x,y,model,n)
     % determines number of data points
     m = length(y);
     
-    % sets up A matrix
-    A = zeros(m,n+1);
+    % sets up X matrix
+    X = zeros(m,n+1);
     for i = 1:m
         for j = 1:(n+1)
-            A(i,j) = x(i)^(j-1);
+            X(i,j) = x(i)^(j-1);
         end
     end
     
-    % least squares solution to the normal equations
-    c = inv(A'*A)*(A')*y;
+    % least squares solution to the normal equations (i.e. least squares
+    % coefficient vector)
+    a_hat = inv(X'*X)*(X')*y;
     
-    % sets output variable depending on type of least squares problem
+    % predicted values (evaluation of polynomial or linearized fit)
+    f = zeros(length(x),1);
+    for i = 1:(n+1)
+        f = f+a_hat(i)*x.^(i-1);
+    end
+    
+    % mean of y-values of original data
+    y_bar = mean(y);
+    
+    % coefficient of determination
+    SS_tot = sum((y-y_bar).^2);
+    SS_res = sum((y-f).^2);
+    r2 = 1-(SS_res/SS_tot);
+    
+    % coefficients for non-polynomial models
     if strcmp(model,'linear')
-        varargout{1} = c(1); % c0 where c=(c0,c1)^T
-        varargout{2} = c(2); % c1 where c=(c0,c1)^T
+        m = a_hat(2);
+        b = a_hat(1);
     elseif strcmp(model,'exp') || strcmp(model,'power')
-        varargout{1} = exp(c(1)); % a=e^c0 where c=(c0,c1)^T
-        varargout{2} = c(2); % b=c1 where c=(c0,c1)^T
+        a = exp(a_hat(1));
+        b = a_hat(2);
     elseif strcmp(model,'log')
-        varargout{1} = c(1); % a=c0 where c=(c0,c1)^T
-        varargout{2} = c(2); % b=c1 where c=(c0,c1)^T
-    else
-        varargout{:} = c; % c=(c0,..,cn)^T for nth degree polynomial fit
+        a = a_hat(1);
+        b = a_hat(2);
+    end
+    
+    % model coefficient vector
+    if strcmp(model,'linear')
+        c = [m;b];
+    elseif strcmp(model,'poly')
+        c = a_hat;
+    elseif strcmp(model,'exp') || strcmp(model,'power') || strcmp(model,...
+            'log')
+        c = [a;b];
+    end
+    
+    % creates string storing equation (made to be compatible with LaTeX
+    % interpreter)
+    if strcmp(model,'linear')
+        eqn = "$y="+m+"x"+"+"+b+"$";
+    elseif strcmp(model,'poly')
+        eqn = "$y="+a_hat(1);
+        for i = 2:(n+1)
+            if i == 2
+                eqn = eqn+"+"+a_hat(i)+"x";
+            else
+                eqn = eqn+"+"+a_hat(i)+"x^{"+(i-1)+"}";
+            end
+        end
+        eqn = eqn+"$";
+    elseif strcmp(model,'power')
+        eqn = "$y="+a+"x^{"+b+"}$";
+    elseif strcmp(model,'exp')
+        eqn = "$y="+a+"e^{"+b+"x}$";
+	elseif strcmp(model,'log')
+        eqn = "$y="+a+"+"+b+"\ln{x}$";
     end
     
 end
