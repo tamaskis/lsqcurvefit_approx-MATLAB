@@ -66,6 +66,5 @@ Fits a linear, polynomial, power, exponential, or logarithmic model to a set of 
   
 ## Examples and Additional Documentation
 
-   -  See "EXAMPLES.mlx" or the "Examples" tab on the File Exchange page for examples. 
-   -  See "DOCUMENTATION.pdf" for additional documentation. 
-
+   -  See "EXAMPLES.mlx" or the "Examples" tab on the File Exchange page for examples.
+   -  See "DOCUMENTATION.pdf" for additional documentation.
