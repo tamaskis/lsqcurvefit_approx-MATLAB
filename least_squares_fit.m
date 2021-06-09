@@ -10,14 +10,16 @@
 %   [c,r2,eqn] = least_squares_fit(x,y,'exp')
 %   [c,r2,eqn] = least_squares_fit(x,y,'log')
 %
+% Copyright © 2021 Tamas Kis
+% Last Update: 2021-06-09
+%
+%--------------------------------------------------------------------------
+%
 % MATLAB Central File Exchange: https://www.mathworks.com/matlabcentral/fileexchange/93710-linear-least-squares-curve-fitting-least_squares_fit
 % GitHub: https://github.com/tamaskis/least_squares_fit-MATLAB
 %
 % See EXAMPLES.mlx for examples and "DOCUMENTATION.pdf" for additional 
 % documentation. Both of these files are included with the download.
-%
-% Copyright © 2021 Tamas Kis
-% Last Update: 2021-06-08
 %
 %--------------------------------------------------------------------------
 %
