@@ -33,4 +33,4 @@ Fits a linear, polynomial, power, exponential, or logarithmic model to a set of 
 ## Examples and Additional Documentation
 
    -  See "EXAMPLES.mlx" or the "Examples" tab on the File Exchange page for examples.
-   -  See "DOCUMENTATION.pdf" (included with download, or at https://github.com/tamaskis/least_squares_fit-MATLAB/blob/main/DOCUMENTATION.pdf) for additional documentation.
+   -  See "DOCUMENTATION.pdf" (included with download, also available at https://github.com/tamaskis/least_squares_fit-MATLAB/blob/main/DOCUMENTATION.pdf) for additional documentation.
