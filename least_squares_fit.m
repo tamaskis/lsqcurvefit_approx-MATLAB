@@ -10,8 +10,11 @@
 %   [c,r2,eqn] = least_squares_fit(x,y,'exp')
 %   [c,r2,eqn] = least_squares_fit(x,y,'log')
 %
+% See also polyfit, lsqcurvefit.
+%
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-06-09
+% Contact: tamas.a.kis@outlook.com
+% Last Update: 2021-06-28
 %
 %--------------------------------------------------------------------------
 %
@@ -137,14 +140,26 @@ function [c,r2,eqn] = least_squares_fit(x,y,model,n)
     % creates string storing equation (made to be compatible with LaTeX
     % interpreter)
     if strcmp(model,'linear')
-        eqn = "$y="+m+"x"+"+"+b+"$";
+        if b >= 0
+            eqn = "$y="+m+"x"+"+"+b+"$";
+        else
+            eqn = "$y="+m+"x"+b+"$";
+        end
     elseif strcmp(model,'poly')
         eqn = "$y="+a_hat(1);
         for i = 2:(n+1)
             if i == 2
-                eqn = eqn+"+"+a_hat(i)+"x";
+                if a_hat(i) >= 0
+                    eqn = eqn+"+"+a_hat(i)+"x";
+                else
+                    eqn = eqn+a_hat(i)+"x";
+                end
             else
-                eqn = eqn+"+"+a_hat(i)+"x^{"+(i-1)+"}";
+                if a_hat(i) >= 0
+                    eqn = eqn+"+"+a_hat(i)+"x^{"+(i-1)+"}";
+                else
+                    eqn = eqn+a_hat(i)+"x^{"+(i-1)+"}";
+                end
             end
         end
         eqn = eqn+"$";
@@ -153,7 +168,11 @@ function [c,r2,eqn] = least_squares_fit(x,y,model,n)
     elseif strcmp(model,'exp')
         eqn = "$y="+a+"e^{"+b+"x}$";
 	elseif strcmp(model,'log')
-        eqn = "$y="+a+"+"+b+"\ln{x}$";
+        if b >= 0
+            eqn = "$y="+a+"+"+b+"\ln{x}$";
+        else
+            eqn = "$y="+a+b+"\ln{x}$";
+        end
     end
     
 end
