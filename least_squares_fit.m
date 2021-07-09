@@ -14,7 +14,7 @@
 %
 % Copyright © 2021 Tamas Kis
 % Contact: tamas.a.kis@outlook.com
-% Last Update: 2021-06-28
+% Last Update: 2021-07-09
 %
 %--------------------------------------------------------------------------
 %
@@ -26,17 +26,17 @@
 %
 %--------------------------------------------------------------------------
 %
-% -------
-% INPUTS:
-% -------
+% ------
+% INPUT:
+% ------
 %   x       - (1×m or m×1) independent variable data
 %   y       - (1×m or m×1) dependent variable data
 %   model   - (OPTIONAL) (char) 'linear', 'poly', 'power', 'exp', or 'log'
 %   n       - (OPTIONAL) (1×1) degree of approximating polynomial
 %
-% --------
-% OUTPUTS:
-% --------
+% -------
+% OUTPUT:
+% -------
 %   c       - (2×1 or n×1) coefficient vector describing fit:
 %               --> [m,b] - linear fit
 %               --> [c0,...,cn] - polynomial fit
@@ -72,16 +72,16 @@ function [c,r2,eqn] = least_squares_fit(x,y,model,n)
     end
     
     % performs linearization and sets degree of approximating polynomial
-    if strcmp(model,'linear')
+    if strcmpi(model,'linear')
         n = 1;
-    elseif strcmp(model,'power')
+    elseif strcmpi(model,'power')
         x = log(x);
         y = log(y);
         n = 1;
-    elseif strcmp(model,'exp')
+    elseif strcmpi(model,'exp')
         y = log(y);
         n = 1;
-    elseif strcmp(model,'log')
+    elseif strcmpi(model,'log')
         x = log(x);
         n = 1;
     end
@@ -116,36 +116,36 @@ function [c,r2,eqn] = least_squares_fit(x,y,model,n)
     r2 = 1-(SS_res/SS_tot);
     
     % coefficients for non-polynomial models
-    if strcmp(model,'linear')
+    if strcmpi(model,'linear')
         m = a_hat(2);
         b = a_hat(1);
-    elseif strcmp(model,'exp') || strcmp(model,'power')
+    elseif strcmpi(model,'exp') || strcmpi(model,'power')
         a = exp(a_hat(1));
         b = a_hat(2);
-    elseif strcmp(model,'log')
+    elseif strcmpi(model,'log')
         a = a_hat(1);
         b = a_hat(2);
     end
     
     % model coefficient vector
-    if strcmp(model,'linear')
+    if strcmpi(model,'linear')
         c = [m;b];
-    elseif strcmp(model,'poly')
+    elseif strcmpi(model,'poly')
         c = a_hat;
-    elseif strcmp(model,'exp') || strcmp(model,'power') || strcmp(model,...
-            'log')
+    elseif strcmpi(model,'exp') || strcmpi(model,'power') ||...
+            strcmpi(model,'log')
         c = [a;b];
     end
     
     % creates string storing equation (made to be compatible with LaTeX
     % interpreter)
-    if strcmp(model,'linear')
+    if strcmpi(model,'linear')
         if b >= 0
             eqn = "$y="+m+"x"+"+"+b+"$";
         else
             eqn = "$y="+m+"x"+b+"$";
         end
-    elseif strcmp(model,'poly')
+    elseif strcmpi(model,'poly')
         eqn = "$y="+a_hat(1);
         for i = 2:(n+1)
             if i == 2
@@ -163,11 +163,11 @@ function [c,r2,eqn] = least_squares_fit(x,y,model,n)
             end
         end
         eqn = eqn+"$";
-    elseif strcmp(model,'power')
+    elseif strcmpi(model,'power')
         eqn = "$y="+a+"x^{"+b+"}$";
-    elseif strcmp(model,'exp')
+    elseif strcmpi(model,'exp')
         eqn = "$y="+a+"e^{"+b+"x}$";
-	elseif strcmp(model,'log')
+	elseif strcmpi(model,'log')
         if b >= 0
             eqn = "$y="+a+"+"+b+"\ln{x}$";
         else
