@@ -14,7 +14,7 @@
 %
 % Copyright © 2021 Tamas Kis
 % Contact: tamas.a.kis@outlook.com
-% Last Update: 2021-07-09
+% Last Update: 2021-07-15
 %
 %--------------------------------------------------------------------------
 %
@@ -98,8 +98,10 @@ function [c,r2,eqn] = least_squares_fit(x,y,model,n)
     end
     
     % least squares solution to the normal equations (i.e. least squares
-    % coefficient vector)
-    a_hat = inv(X'*X)*(X')*y;
+    % coefficient vector) - note that the matrix left division "X\y" is 
+    % equivalent to "inv(X'*X)*(X')*y" as the "\" operator by default will 
+    % find the least squares solution for overdetermined systems
+    a_hat = X\y;
     
     % predicted values (evaluation of polynomial or linearized fit)
     f = zeros(length(x),1);
