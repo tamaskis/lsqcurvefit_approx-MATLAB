@@ -1,6 +1,6 @@
 # `lsqcurvefit_approx`
 
-Fits linear and polynomial models to data using linear least squares, and approximates nonlinear models through linearization.
+Fits linear and polynomial models to data using linear least squares and approximates nonlinear models through linearization.
 
 
 ## Syntax
