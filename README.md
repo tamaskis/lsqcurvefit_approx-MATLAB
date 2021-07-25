@@ -31,7 +31,7 @@ Fits linear and polynomial models to data using linear least squares and approxi
 
 
 ## Warning
-- **Only the linear and polynomial fits are true linear least squares fits**. The nonlinear fits (power, exponential, and logarithmic) are _approximated_ through transforming the model to a linear form and then applying a least squares fit.
+**Only the linear and polynomial fits are true linear least squares fits**. The nonlinear fits (power, exponential, and logarithmic) are _approximated_ through transforming the model to a linear form and then applying a least squares fit.
 
 
 ## Examples and Additional Documentation
