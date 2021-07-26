@@ -32,7 +32,7 @@ Fits linear and polynomial models to data using linear least squares and approxi
 
 ## Additional Notes/Warnings:
    - **Only the linear and polynomial fits are true linear least squares fits**. The nonlinear fits (power, exponential, and logarithmic) are _approximated_ through transforming the model to a linear form and then applying a least squares fit.
-   - Taking the logarithm of a negative number produces a complex number. When linearizing, this function will take only the real part of the resulting complex numbers in the case that a negative data point has to be linearized. The resulting fit is typically poor, and a (slightly) better fit could be obtained by excluding those data points that would trigger these issues during linearization.
+   - Taking the logarithm of a negative number produces a complex number. When linearizing, for simplicity, this function will take only the real part of the resulting complex numbers in the case that a negative data point has to be linearized. The resulting fit is typically poor, and a (slightly) better fit could be obtained by excluding those data points altogether.
 
 
 ## Examples and Additional Documentation
