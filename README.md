@@ -1,4 +1,4 @@
-# `lsqcurvefit_approx`
+# `lsqcurvefit_approx` [![View Approximate Least Squares Curve Fitting (lsqcurvefit_approx) on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/93710-approximate-least-squares-curve-fitting-lsqcurvefit_approx)
 
 Fits linear and polynomial models to data using linear least squares and approximates nonlinear models through linearization.
 
