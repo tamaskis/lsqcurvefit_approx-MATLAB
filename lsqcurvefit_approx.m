@@ -1,28 +1,25 @@
 %==========================================================================
 %
-% least_squares_fit  Fits a linear, polynomial, power, exponential, or 
-% logarithmic model to a set of data using linear least squares.
+% lsqcurvefit_approx  Fits linear and polynomial models to data using 
+% linear least squares and approximates nonlinear models through 
+% linearization.
 %
-%   [c,r2,eqn] = least_squares_fit(x,y)
-%   [c,r2,eqn] = least_squares_fit(x,y,'linear')
-%   [c,r2,eqn] = least_squares_fit(x,y,'poly',n)
-%   [c,r2,eqn] = least_squares_fit(x,y,'power')
-%   [c,r2,eqn] = least_squares_fit(x,y,'exp')
-%   [c,r2,eqn] = least_squares_fit(x,y,'log')
+%   [c,r2,eqn] = lsqcurvefit_approx(x,y)
+%   [c,r2,eqn] = lsqcurvefit_approx(x,y,'linear')
+%   [c,r2,eqn] = lsqcurvefit_approx(x,y,'poly',n)
+%   [c,r2,eqn] = lsqcurvefit_approx(x,y,'power')
+%   [c,r2,eqn] = lsqcurvefit_approx(x,y,'exp')
+%   [c,r2,eqn] = lsqcurvefit_approx(x,y,'log')
 %
 % See also polyfit, lsqcurvefit.
 %
 % Copyright © 2021 Tamas Kis
+% Website: tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
-% Last Update: 2021-07-15
+% Last Update: 2021-07-25
 %
-%--------------------------------------------------------------------------
-%
-% MATLAB Central File Exchange: https://www.mathworks.com/matlabcentral/fileexchange/93710-linear-least-squares-curve-fitting-least_squares_fit
-% GitHub: https://github.com/tamaskis/least_squares_fit-MATLAB
-%
-% See EXAMPLES.mlx for examples and "DOCUMENTATION.pdf" for additional 
-% documentation. Both of these files are included with the download.
+% REFERENCES:
+%   [1] https://tamaskis.github.io/documentation/Least%20Squares%20Curve%20Fitting.pdf
 %
 %--------------------------------------------------------------------------
 %
@@ -56,7 +53,7 @@
 %   --> logarithmic fit:    y=a+b*ln(x)
 %
 %==========================================================================
-function [c,r2,eqn] = least_squares_fit(x,y,model,n)
+function [c,r2,eqn] = lsqcurvefit_approx(x,y,model,n)
     
     % transposes data vectors to column vectors if needed
     if size(x,1) < length(x)
@@ -72,18 +69,29 @@ function [c,r2,eqn] = least_squares_fit(x,y,model,n)
     end
     
     % performs linearization and sets degree of approximating polynomial
+    show_warning = false;
     if strcmpi(model,'linear')
         n = 1;
     elseif strcmpi(model,'power')
-        x = log(x);
-        y = log(y);
+        if (sum(x<0)>0) || (sum(y<0)>0), show_warning = true; end
+        x = real(log(x));
+        y = real(log(y));
         n = 1;
     elseif strcmpi(model,'exp')
-        y = log(y);
+        if (sum(y<0)>0), show_warning = true; end
+        y = real(log(y));
         n = 1;
     elseif strcmpi(model,'log')
-        x = log(x);
+        if (sum(x<0)>0), show_warning = true; end
+        x = real(log(x));
         n = 1;
+    end
+    
+    % throws warning if any of the elements being linearized via logarithms
+    % is less than one
+    if show_warning
+        warning("One or more linearized data points were complex. "+...
+            "To proceed, only the real part of these points were used.");
     end
 
     % determines number of data points
