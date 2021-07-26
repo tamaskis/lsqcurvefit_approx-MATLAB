@@ -38,4 +38,4 @@ Fits linear and polynomial models to data using linear least squares and approxi
 ## Examples and Additional Documentation
 
    -  See "EXAMPLES.mlx" or the "Examples" tab on the File Exchange page for examples.
-   -  See "Linear Least Squares.pdf" (included with download, also available at https://tamaskis.github.io/documentation/Linear%20Least%20Squares.pdf) for additional documentation.
+   -  See "Least Squares Curve Fitting.pdf" (included with download, also available at https://tamaskis.github.io/documentation/Least%20Squares%20Curve%20Fitting.pdf) for additional documentation.
