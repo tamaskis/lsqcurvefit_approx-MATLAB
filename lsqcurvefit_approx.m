@@ -16,29 +16,29 @@
 % Copyright © 2021 Tamas Kis
 % Website: tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
-% Last Update: 2021-07-25
+% Last Update: 2021-08-09
 %
-% REFERENCES:
-%   [1] https://tamaskis.github.io/documentation/Least%20Squares%20Curve%20Fitting.pdf
+% TECHNICAL DOCUMENTATION:
+% https://tamaskis.github.io/documentation/Least%20Squares%20Curve%20Fitting.pdf
 %
 %--------------------------------------------------------------------------
 %
 % ------
 % INPUT:
 % ------
-%   x       - (1×m or m×1) independent variable data
-%   y       - (1×m or m×1) dependent variable data
+%   x       - (1×m or m×1 double) independent variable data
+%   y       - (1×m or m×1 double) dependent variable data
 %   model   - (OPTIONAL) (char) 'linear', 'poly', 'power', 'exp', or 'log'
-%   n       - (OPTIONAL) (1×1) degree of approximating polynomial
+%   n       - (OPTIONAL) (1×1 double) degree of approximating polynomial
 %
 % -------
 % OUTPUT:
 % -------
-%   c       - (2×1 or n×1) coefficient vector describing fit:
+%   c       - (2×1 or n×1 double) coefficient vector describing fit:
 %               --> [m,b] - linear fit
 %               --> [c0,...,cn] - polynomial fit
 %               --> [a,b] - power, exponential, and logarithmic fits
-%   r2      - (1×1) coefficient of determination
+%   r2      - (1×1 double) coefficient of determination
 %   eqn     - (string) string storing fitted equation (includes "$" signs,
 %             so make sure to enable the LaTeX interpreter when using "eqn"
 %             in plots)
