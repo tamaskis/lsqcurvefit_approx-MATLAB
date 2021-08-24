@@ -14,9 +14,9 @@
 % See also polyfit, lsqcurvefit.
 %
 % Copyright © 2021 Tamas Kis
+% Last Update: 2021-08-24
 % Website: tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
-% Last Update: 2021-08-24
 %
 % TECHNICAL DOCUMENTATION:
 % https://tamaskis.github.io/documentation/Least_Squares_Curve_Fitting.pdf
