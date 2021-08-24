@@ -16,10 +16,16 @@
 % Copyright © 2021 Tamas Kis
 % Website: tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
-% Last Update: 2021-08-09
+% Last Update: 2021-08-24
 %
 % TECHNICAL DOCUMENTATION:
-% https://tamaskis.github.io/documentation/Least%20Squares%20Curve%20Fitting.pdf
+% https://tamaskis.github.io/documentation/Least_Squares_Curve_Fitting.pdf
+%
+% REFERENCES:
+%   [1] MATH 2410 Lecture Notes (Vanderbilt University)
+%   [2] MATH 2810 Lecture Notes (Vanderbilt University)
+%   [3] http://academic.macewan.ca/physlabs/Linearization.pdf
+%   [4] https://en.wikipedia.org/wiki/Coefficient_of_determination
 %
 %--------------------------------------------------------------------------
 %
@@ -34,7 +40,7 @@
 % -------
 % OUTPUT:
 % -------
-%   c       - (2×1 or n×1 double) coefficient vector describing fit:
+%   c       - (2×1 or (n+1)×1 double) coefficient vector describing fit:
 %               --> [m,b] - linear fit
 %               --> [c0,...,cn] - polynomial fit
 %               --> [a,b] - power, exponential, and logarithmic fits
