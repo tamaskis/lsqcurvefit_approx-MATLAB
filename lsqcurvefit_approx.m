@@ -15,7 +15,7 @@
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2021-08-28
-% Website: https://tamaskis.github.io/
+% Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
 % TECHNICAL DOCUMENTATION:
