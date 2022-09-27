@@ -14,18 +14,12 @@
 % See also polyfit, lsqcurvefit.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-08-28
+% Last Update: 2022-09-26
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
 % TECHNICAL DOCUMENTATION:
-% https://tamaskis.github.io/documentation/Least_Squares_Curve_Fitting.pdf
-%
-% REFERENCES:
-%   [1] MATH 2410 Lecture Notes (Vanderbilt University)
-%   [2] MATH 2810 Lecture Notes (Vanderbilt University)
-%   [3] http://academic.macewan.ca/physlabs/Linearization.pdf
-%   [4] https://en.wikipedia.org/wiki/Coefficient_of_determination
+% https://tamaskis.github.io/files/Least_Squares_Curve_Fitting.pdf
 %
 %--------------------------------------------------------------------------
 %
@@ -52,11 +46,11 @@
 % -----
 % NOTE:
 % -----
-%   --> linear fit:         y=m*x+b
-%   --> polynomial fit:     y=c0+c1*x+...+cn*x^n
-%   --> power fit:          y=a*x^b
-%   --> exponential fit:    y=a*e^(b*x)
-%   --> logarithmic fit:    y=a+b*ln(x)
+%   --> linear fit:         y = mx + b
+%   --> polynomial fit:     y = c₀ + c₁x + ⋯ + cₙxⁿ
+%   --> power fit:          y = axᵇ
+%   --> exponential fit:    y = aeᵇˣ
+%   --> logarithmic fit:    y = a + (b)ln(x)
 %
 %==========================================================================
 function [c,r2,eqn] = lsqcurvefit_approx(x,y,model,n)
@@ -99,7 +93,7 @@ function [c,r2,eqn] = lsqcurvefit_approx(x,y,model,n)
         warning("One or more linearized data points were complex. "+...
             "To proceed, only the real part of these points were used.");
     end
-
+    
     % determines number of data points
     m = length(y);
     
